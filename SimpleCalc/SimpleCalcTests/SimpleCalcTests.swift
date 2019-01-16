@@ -12,7 +12,7 @@ class ExtendedCalcTests :XCTestCase {
     let calc = Calculator()
     
     //func testNegativeOps() {
-    //    XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
+    //   XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
     //}
 }
 

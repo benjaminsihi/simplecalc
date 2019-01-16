@@ -10,67 +10,65 @@ import Foundation
 
 public class Calculator {
     public func calculate(_ args: [String]) -> Int {
+        // Pre: it assumes the user only give numerical input or minus sign.
+        // Post: it takes a String and transform it to integer.
         func convertStringToNum (_ input: String) -> Int {
             var result: Int = 0;
-            for char in input {
-                switch char {
-                case "1":
-                    result = result * 10 + 1
-                case "2":
-                    result = result * 10 + 2
-                case "3":
-                    result = result * 10 + 3
-                case "4":
-                    result = result * 10 + 4
-                case "5":
-                    result = result * 10 + 5
-                case "6":
-                    result = result * 10 + 6
-                case "7":
-                    result = result * 10 + 7
-                case "8":
-                    result = result * 10 + 8
-                case "9":
-                    result = result * 10 + 9
-                case "0" :
-                    result = result * 10 + 0
-                default:
-                    result = -1
-                }
+            var inputString:String = input
+            inputString.remove(at: inputString.startIndex)
+            if input[input.startIndex] == "-" {
+                result = -1 * Int(inputString)!
+            } else {
+                result = Int(input)!
             }
             return result;
         }
         
-        let simpleOperation:String = args[1]
         var result: Int = 0
-        switch simpleOperation {
-        case "+" :
-            result = convertStringToNum(args[0]) + convertStringToNum(args[2])
-        case "-" :
-            result = convertStringToNum(args[0]) - convertStringToNum(args[2])
-        case "/" :
-            result = convertStringToNum(args[0]) / convertStringToNum(args[2])
-        case "*" :
-            result = convertStringToNum(args[0]) * convertStringToNum(args[2])
-        case "%" :
-            result = convertStringToNum(args[0]) % convertStringToNum(args[2])
-        case "fact" :
-            result = convertStringToNum(args[0])
-            if result == 0 {
-                result = 1
+        
+        // Test on three special cases "count", "avg", "fact".
+        // They locate at the end of array.
+        if args[args.count - 1] == "count" {
+            if args.count >= 2 {
+                result = args.count - 1
             }
-            for index in 1...result {
-                result *= index
-            }
-        default :
-            if args[args.count - 1] == "count" {
-                result = args.count - 2
-            } else {
+            return result
+        } else if args[args.count - 1] == "avg" {
+            if args[0] != "avg" {
                 for index in 0...args.count - 2 {
                     result += convertStringToNum(args[index])
                 }
-                result = result / (args.count - 2)
+                if args.count - 2 > 0 {
+                    result = result / (args.count - 1)
+                }
             }
+            return result
+        } else if args[args.count - 1] == "fact" {
+            if (args[0] != "fact") {
+                let input:Int = convertStringToNum(args[0])
+                result = 1
+                // The factorial for negative number doesnt' exist
+                if input > 0 { // for postitive values
+                    for index in 1...input {
+                        result *= index
+                    }
+                }
+            }
+            return result
+        }
+        
+        // if/else if structure of simple computation, such as addition and subtraction.
+        let simpleOperation:String = args[1]
+        if simpleOperation == "+" {
+            result = convertStringToNum(args[0]) + convertStringToNum(args[2])
+        } else if simpleOperation == "+" {
+            result = convertStringToNum(args[0]) - convertStringToNum(args[2])
+        } else if simpleOperation == "/" {
+            result = convertStringToNum(args[0]) / convertStringToNum(args[2])
+        } else if simpleOperation == "*" {
+            result = convertStringToNum(args[0]) * convertStringToNum(args[2])
+        } else if simpleOperation == "%"{
+            result = convertStringToNum(args[0]) % convertStringToNum(args[2])
         }
         return result
     }
