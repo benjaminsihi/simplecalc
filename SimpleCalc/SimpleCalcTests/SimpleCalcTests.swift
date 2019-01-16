@@ -11,9 +11,19 @@ import XCTest
 class ExtendedCalcTests :XCTestCase {
     let calc = Calculator()
     
-    //func testNegativeOps() {
-    //   XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
-    //}
+    func testNegativeOps() {
+        XCTAssert(calc.calculate(["2", "+", "-12"]) == -10)
+        XCTAssert(calc.calculate(["15", "/", "-3"]) == -5)
+        XCTAssert(calc.calculate(["10", "%", "-2"]) == 0)
+        XCTAssert(calc.calculate(["2", "*", "-12"]) == -24)
+        XCTAssert(calc.calculate(["-9", "-", "11"]) == -20)
+        XCTAssert(calc.calculate(["-2", "2", "-4", "4", "avg"]) == 0) // 12 / 4 = 3
+        XCTAssert(calc.calculate(["-2", "avg"]) == -2) // -2 / 1 = -2
+        XCTAssert(calc.calculate(["-5", "fact"]) == 0) // doesn't exist
+        XCTAssert(calc.calculate(["-1", "2", "3", "count"]) == 3)
+        XCTAssert(calc.calculate(["11", "2", "33", "-4", "5", "count"]) == 5)
+        
+    }
 }
 
 class SimpleCalcTests: XCTestCase {

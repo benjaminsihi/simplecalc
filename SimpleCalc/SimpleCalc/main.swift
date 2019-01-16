@@ -52,6 +52,8 @@ public class Calculator {
                     for index in 1...input {
                         result *= index
                     }
+                } else if input < 0 {
+                    result = 0
                 }
             }
             return result
@@ -61,7 +63,7 @@ public class Calculator {
         let simpleOperation:String = args[1]
         if simpleOperation == "+" {
             result = convertStringToNum(args[0]) + convertStringToNum(args[2])
-        } else if simpleOperation == "+" {
+        } else if simpleOperation == "-" {
             result = convertStringToNum(args[0]) - convertStringToNum(args[2])
         } else if simpleOperation == "/" {
             result = convertStringToNum(args[0]) / convertStringToNum(args[2])
